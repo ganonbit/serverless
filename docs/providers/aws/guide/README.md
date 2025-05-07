@@ -1,7 +1,8 @@
 <!--
-title: Serverless - AWS Guide
-menuText: User Guide
-layout: Doc
+title: Serverless Framework - AWS Guide
+short_title: AWS Guide
+description: An introduction to using AWS and AWS Lambda with the Serverless Framework.
+keywords: ['Serverless Framework', 'AWS Lambda', 'AWS Guide', 'Serverless']
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->

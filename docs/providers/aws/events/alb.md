@@ -1,9 +1,14 @@
 <!--
 title: Serverless Framework - AWS Lambda Events - ALB
-menuText: Application Load Balancer
-menuOrder: 9
+short_title: AWS Lambda Events - ALB
 description: Setting up AWS Application Load Balancer events with AWS Lambda via the Serverless Framework
-layout: Doc
+keywords:
+  [
+    'Serverless Framework',
+    'AWS Lambda',
+    'Application Load Balancer',
+    'ALB events',
+  ]
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -192,6 +197,25 @@ functions:
       - alb:
           listenerArn: arn:aws:elasticloadbalancing:us-east-1:12345:listener/app/my-load-balancer/50dc6c495c0c9188/
           priority: 1
+          conditions:
+            path: /hello
+```
+
+## Specifying explicitly the target group names
+
+If you want full control over the name used for the target group you can specify it using the `targetGroupName` property. Note that the name must be unique across the entire region and is limited to 32 characters with only alphanumerics and hyphens allowed.
+
+This setting is exclusive with the `provider.alb.targetGroupPrefix` setting.
+
+```yml
+functions:
+  albEventConsumer:
+    handler: handler.hello
+    events:
+      - alb:
+          listenerArn: arn:aws:elasticloadbalancing:us-east-1:12345:listener/app/my-load-balancer/50dc6c495c0c9188/
+          priority: 1
+          targetGroupName: helloTargetGroup
           conditions:
             path: /hello
 ```

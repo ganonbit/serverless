@@ -1,47 +1,52 @@
-'use strict';
+'use strict'
 
-const awsRequest = require('@serverless/test/aws-request');
+const awsRequest = require('@serverless/test/aws-request')
+const S3Service = require('aws-sdk').S3
 
-function createBucket(bucket) {
-  return awsRequest('S3', 'createBucket', { Bucket: bucket });
+async function createBucket(bucket) {
+  return awsRequest(S3Service, 'createBucket', { Bucket: bucket })
 }
 
-function createAndRemoveInBucket(bucket, opts = {}) {
-  const prefix = opts.prefix || '';
-  const suffix = opts.suffix || '';
-  const fileName = opts.fileName || 'object';
+async function createAndRemoveInBucket(bucket, opts = {}) {
+  const prefix = opts.prefix || ''
+  const suffix = opts.suffix || ''
+  const fileName = opts.fileName || 'object'
 
   const params = {
     Bucket: bucket,
     Key: `${prefix}${fileName}${suffix}`,
     Body: 'hello world',
-  };
+  }
 
-  return awsRequest('S3', 'putObject', params).then(() => {
-    delete params.Body;
-    return awsRequest('S3', 'deleteObject', params);
-  });
+  return awsRequest(S3Service, 'putObject', params).then(() => {
+    delete params.Body
+    return awsRequest(S3Service, 'deleteObject', params)
+  })
 }
 
-function emptyBucket(bucket) {
-  return awsRequest('S3', 'listObjects', { Bucket: bucket }).then(data => {
-    const items = data.Contents;
-    const numItems = items.length;
-    if (numItems) {
-      const keys = items.map(item => Object.assign({}, { Key: item.Key }));
-      return awsRequest('S3', 'deleteObjects', {
-        Bucket: bucket,
-        Delete: {
-          Objects: keys,
-        },
-      });
-    }
-    return null;
-  });
+async function emptyBucket(bucket) {
+  return awsRequest(S3Service, 'listObjects', { Bucket: bucket }).then(
+    (data) => {
+      const items = data.Contents
+      const numItems = items.length
+      if (numItems) {
+        const keys = items.map((item) => Object.assign({}, { Key: item.Key }))
+        return awsRequest(S3Service, 'deleteObjects', {
+          Bucket: bucket,
+          Delete: {
+            Objects: keys,
+          },
+        })
+      }
+      return null
+    },
+  )
 }
 
-function deleteBucket(bucket) {
-  return emptyBucket(bucket).then(() => awsRequest('S3', 'deleteBucket', { Bucket: bucket }));
+async function deleteBucket(bucket) {
+  return emptyBucket(bucket).then(() =>
+    awsRequest(S3Service, 'deleteBucket', { Bucket: bucket }),
+  )
 }
 
 module.exports = {
@@ -49,4 +54,4 @@ module.exports = {
   createAndRemoveInBucket,
   emptyBucket,
   deleteBucket,
-};
+}

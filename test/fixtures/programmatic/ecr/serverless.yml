@@ -1,0 +1,16 @@
+service: service
+
+configValidationMode: error
+frameworkVersion: '*'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  ecr:
+    images:
+      baseimage:
+        path: ./
+
+functions:
+  foo:
+    image: baseimage

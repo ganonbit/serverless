@@ -1,36 +1,41 @@
-'use strict';
+'use strict'
 
-const awsRequest = require('@serverless/test/aws-request');
+const awsRequest = require('@serverless/test/aws-request')
+const SQSService = require('aws-sdk').SQS
 
-function createSqsQueue(queueName) {
+async function createSqsQueue(queueName) {
   const params = {
     QueueName: queueName,
-  };
+  }
 
-  return awsRequest('SQS', 'createQueue', params);
+  return awsRequest(SQSService, 'createQueue', params)
 }
 
-function deleteSqsQueue(queueName) {
-  return awsRequest('SQS', 'getQueueUrl', { QueueName: queueName }).then(data => {
-    const params = {
-      QueueUrl: data.QueueUrl,
-    };
-    return awsRequest('SQS', 'deleteQueue', params);
-  });
+async function deleteSqsQueue(queueName) {
+  return awsRequest(SQSService, 'getQueueUrl', { QueueName: queueName }).then(
+    (data) => {
+      const params = {
+        QueueUrl: data.QueueUrl,
+      }
+      return awsRequest(SQSService, 'deleteQueue', params)
+    },
+  )
 }
 
-function sendSqsMessage(queueName, message) {
-  return awsRequest('SQS', 'getQueueUrl', { QueueName: queueName }).then(data => {
-    const params = {
-      QueueUrl: data.QueueUrl,
-      MessageBody: message,
-    };
-    return awsRequest('SQS', 'sendMessage', params);
-  });
+async function sendSqsMessage(queueName, message) {
+  return awsRequest(SQSService, 'getQueueUrl', { QueueName: queueName }).then(
+    (data) => {
+      const params = {
+        QueueUrl: data.QueueUrl,
+        MessageBody: message,
+      }
+      return awsRequest(SQSService, 'sendMessage', params)
+    },
+  )
 }
 
 module.exports = {
   createSqsQueue,
   deleteSqsQueue,
   sendSqsMessage,
-};
+}

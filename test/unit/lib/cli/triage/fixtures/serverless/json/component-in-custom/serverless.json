@@ -1,0 +1,5 @@
+{
+  "service": "foo",
+  "provider": { "name": "foo" },
+  "custom": { "component": "foo" }
+}

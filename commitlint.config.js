@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   rules: {
@@ -10,12 +10,14 @@ module.exports = {
       'always',
       [
         '',
-        'Analytics',
+        'API',
+        'AWS ActiveMQ',
         'AWS ALB',
         'AWS Alexa',
         'AWS API Gateway',
         'AWS CloudFormation',
         'AWS CloudFront',
+        'AWS CloudWatch',
         'AWS Cognito',
         'AWS Credentials',
         'AWS Deploy',
@@ -23,11 +25,15 @@ module.exports = {
         'AWS HTTP API',
         'AWS IAM',
         'AWS Info',
+        'AWS Invocation',
         'AWS IOT',
+        'AWS Kafka',
         'AWS Kinesis',
         'AWS Lambda',
+        'AWS Layers',
         'AWS Local Invocation',
         'AWS MSK',
+        'AWS RabbitMQ',
         'AWS S3',
         'AWS Schedule',
         'AWS SNS',
@@ -35,13 +41,16 @@ module.exports = {
         'AWS Stream',
         'AWS Websocket',
         'CLI',
+        'CLI Onboarding',
         'Components',
+        'Console',
         'Config Schema',
         'Dashboard',
         'Packaging',
         'Plugins',
         'Print',
         'Standalone',
+        'Telemetry',
         'Templates',
         'User Config',
         'Variables',
@@ -55,7 +64,18 @@ module.exports = {
     'type-enum': [
       2,
       'always',
-      ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'style', 'test'],
+      [
+        'build',
+        'chore',
+        'ci',
+        'docs',
+        'feat',
+        'fix',
+        'perf',
+        'refactor',
+        'style',
+        'test',
+      ],
     ],
   },
-};
+}

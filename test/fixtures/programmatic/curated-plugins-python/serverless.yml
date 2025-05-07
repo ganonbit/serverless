@@ -1,0 +1,12 @@
+service: service
+
+configValidationMode: error
+frameworkVersion: '*'
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  function:
+    handler: handler.hello

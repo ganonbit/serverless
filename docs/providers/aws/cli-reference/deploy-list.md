@@ -1,9 +1,19 @@
 <!--
 title: Serverless Framework Commands - AWS Lambda - Deploy List
-menuText: deploy list
-menuOrder: 7
 description: List your previous CloudFormation deployments
-layout: Doc
+short_title: Commands - Deploy List
+keywords:
+  [
+    'Serverless',
+    'Framework',
+    'AWS',
+    'Lambda',
+    'Deploy List',
+    'Serverless AWS Lambda Commands',
+    'AWS Lambda Deployment List',
+    'Serverless Framework CLI',
+    'Serverless Deploy List',
+  ]
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -24,6 +34,7 @@ The displayed information is useful when rolling back a deployment or function v
 
 - `--stage` or `-s` The stage in your service that you want to deploy to.
 - `--region` or `-r` The region in that stage that you want to deploy to.
+- `--aws-profile` The AWS profile you want to use.
 
 ## Examples
 

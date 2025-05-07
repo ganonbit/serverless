@@ -1,9 +1,8 @@
 <!--
 title: Serverless Framework Commands - AWS Lambda - Package
-menuText: package
-menuOrder: 4
-description: Package your service according to a specified provider
-layout: Doc
+description: Package your service according to a specified provider using the Serverless Framework.
+short_title: Commands - Package
+keywords: ['Serverless', 'Framework', 'AWS Lambda', 'deployment']
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -24,6 +23,7 @@ serverless package
 
 - `--stage` or `-s` The stage in your service that you want to deploy to.
 - `--region` or `-r` The region in that stage that you want to deploy to.
+- `--aws-profile` The AWS profile you want to use.
 - `--package` or `-p` path to the custom packaging directory you want.
 
 ## Examples

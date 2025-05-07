@@ -1,9 +1,8 @@
 <!--
 title: Serverless Rollback CLI Command
-menuText: rollback
-menuOrder: 14
 description: Rollback the Serverless service to a specific deployment
-layout: Doc
+short_title: Commands - Rollback
+keywords: ['Serverless', 'Framework', 'AWS Lambda', 'rollback', 'deployment']
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -25,7 +24,7 @@ If `timestamp` is not specified, Framework will show your existing deployments.
 ## Options
 
 - `--timestamp` or `-t` The deployment you want to rollback to.
-- `--verbose` or `-v` Shows any Stack Output.
+- `--verbose` Shows any Stack Output.
 
 ## Provided lifecycle events
 

@@ -1,9 +1,16 @@
 <!--
 title: Serverless Framework Commands - AWS Lambda - Print
-menuText: print
-menuOrder: 21
-description: Print your config with all variables resolved for debugging
-layout: Doc
+description: Print your `serverless.yml` config file with all variables resolved for debugging.
+short_title: Commands - Print
+keywords:
+  [
+    'Serverless',
+    'Framework',
+    'AWS Lambda',
+    'print',
+    'configuration',
+    'variables',
+  ]
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -16,9 +23,7 @@ layout: Doc
 
 Print your `serverless.yml` config file with all variables resolved.
 
-If you're using [Serverless Variables](https://serverless.com/framework/docs/providers/aws/guide/variables/)
-in your `serverless.yml`, it can be difficult to know if your syntax is correct
-or if the variables are resolving as you expect.
+If you're using [Serverless Variables](https://serverless.com/framework/docs/guides/variables/) in your `serverless.yml`, it can be difficult to know if your syntax is correct or if the variables are resolving as you expect.
 
 With this command, it will print the fully-resolved config to your console.
 
@@ -44,8 +49,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  stage: ${opt:stage, "dev"}
+  runtime: nodejs14.x
 
 functions:
   hello:
@@ -68,7 +72,7 @@ custom:
   bucketName: test
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   stage: dev # <-- Resolved
 functions:
   hello:

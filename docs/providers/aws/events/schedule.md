@@ -1,9 +1,20 @@
 <!--
 title: Serverless Framework - AWS Lambda Events - Scheduled & Recurring
-menuText: Schedule
-menuOrder: 6
 description: Setting up Scheduled, Recurring, CRON Task Events with AWS Lambda via the Serverless Framework
-layout: Doc
+short_title: AWS Lambda Events - Schedule
+keywords:
+  [
+    'Serverless',
+    'Framework',
+    'AWS',
+    'Lambda',
+    'Events',
+    'AWS Lambda Schedule',
+    'Serverless Framework Schedule',
+    'AWS Lambda CRON Tasks',
+    'AWS Lambda Scheduled Events',
+    'AWS Lambda Recurring Events',
+  ]
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -68,4 +79,51 @@ events:
       name: your-scheduled-rate-event-name
       description: 'your scheduled rate event description'
       rate: rate(2 hours)
+```
+
+## Specify multiple schedule expressions
+
+An array of schedule expressions (i.e. using either `rate` or `cron` syntax) can be specified, in order to avoid repeating other configuration variables.
+This is specially useful in situations in which there's no other way than using multiple cron expressions to schedule a function.
+
+This will trigger the function at certain times on weekdays and on different times on weekends, using the same input:
+
+```yaml
+functions:
+  foo:
+    handler: foo.handler
+    events:
+      - schedule:
+          rate:
+            - cron(0 0/4 ? * MON-FRI *)
+            - cron(0 2 ? * SAT-SUN *)
+          input:
+            key1: value1
+            key2: value2
+```
+
+## Use AWS::Scheduler::Schedule instead of AWS::Event::Rule
+
+**Note**: `scheduler` does not accept the `inputPath` or `inputTransformer` options. If you need these, use the default `eventBus` option
+
+AWS has account-wide limits on the number of `AWS::Event::Rule` triggers per bus (300 events), and all Lambda schedules go into a single bus with no way to override it.
+This can lead to a situation where large projects hit the limit with no ability to schedule more events.
+
+However, `AWS::Scheduler::Schedule` has much higher limits (1,000,000 events), and is configured identically.
+`method` can be set in order to migrate to this trigger type seamlessly. It also allows you to specify a timezone to run your event based on local time.
+The default method is `eventBus`, which configures an `AWS::Event::Rule`.
+
+```yaml
+functions:
+  foo:
+    handler: foo.handler
+    events:
+      - schedule:
+          method: scheduler
+          rate:
+            - cron(0 0/4 ? * MON-FRI *)
+          timezone: America/New_York
+          input:
+            key1: value1
+            key2: value2
 ```

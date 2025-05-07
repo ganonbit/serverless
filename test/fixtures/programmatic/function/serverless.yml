@@ -1,0 +1,13 @@
+service: service
+
+configValidationMode: error
+frameworkVersion: '*'
+
+provider:
+  name: aws
+
+functions:
+  basic:
+    handler: basic.handler
+  other:
+    handler: other.handler

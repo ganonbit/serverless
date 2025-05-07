@@ -1,0 +1,12 @@
+service: configSchemaExtensionsError
+
+provider:
+  name: someProvider
+  runtime: nodejs16.x
+
+configValidationMode: error
+frameworkVersion: '*'
+
+functions:
+  someFunction:
+    handler: 'myHandler.main'

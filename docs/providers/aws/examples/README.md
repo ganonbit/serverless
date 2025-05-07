@@ -1,7 +1,9 @@
 <!--
 title: Serverless - AWS Lambda - Examples
-menuText: Examples
-layout: Doc
+short_title: Serverless Examples
+description: AWS Lambda examples using the Serverless Framework.
+keywords:
+  ['Serverless Framework', 'AWS Lambda', 'examples', 'serverless functions']
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -16,4 +18,4 @@ Search for AWS Serverless Examples using our [Example Explorer](https://serverle
 
 Have an example? Submit a PR or [open an issue](https://github.com/serverless/examples/issues). ⚡️
 
-If you have questions, join the [chat in gitter](https://gitter.im/serverless/serverless) or [post over on the forums](https://forum.serverless.com/)
+If you have questions, join the [Slack community](https://serverless.com/slack) or [post over on the forums](https://forum.serverless.com/)

@@ -1,16 +1,17 @@
-'use strict';
+'use strict'
 
-const awsRequest = require('@serverless/test/aws-request');
+const awsRequest = require('@serverless/test/aws-request')
+const DDBDocumentClient = require('aws-sdk').DynamoDB.DocumentClient
 
-function putDynamoDbItem(tableName, item) {
+async function putDynamoDbItem(tableName, item) {
   const params = {
     TableName: tableName,
     Item: item,
-  };
+  }
 
-  return awsRequest('DynamoDB.DocumentClient', 'put', params);
+  return awsRequest(DDBDocumentClient, 'put', params)
 }
 
 module.exports = {
   putDynamoDbItem,
-};
+}

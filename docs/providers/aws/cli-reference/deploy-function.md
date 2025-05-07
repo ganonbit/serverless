@@ -1,9 +1,19 @@
 <!--
 title: Serverless Framework Commands - AWS Lambda - Deploy Function
-menuText: deploy function
-menuOrder: 6
-description: Deploy your AWS Lambda functions quickly without cloudformation
-layout: Doc
+description: Deploy your AWS Lambda functions quickly without CloudFormation
+short_title: Commands - Deploy Function
+keywords:
+  [
+    'Serverless',
+    'Framework',
+    'AWS',
+    'Lambda',
+    'Deploy Function',
+    'Serverless AWS Lambda Commands',
+    'AWS Lambda Deployment',
+    'Serverless Framework CLI',
+    'Serverless Deploy Function',
+  ]
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -30,6 +40,7 @@ cycles and not production deployments
 - `--function` or `-f` The name of the function which should be deployed
 - `--stage` or `-s` The stage in your service that you want to deploy to.
 - `--region` or `-r` The region in that stage that you want to deploy to.
+- `--aws-profile` The AWS profile you want to use.
 - `--update-config` or `-u` Pushes ONLY Lambda-level configuration changes e.g. handler, timeout or memorySize
 
 ## Examples
@@ -43,7 +54,9 @@ serverless deploy function --function helloWorld
 ### Deployment with stage and region options
 
 ```bash
-serverless deploy function --function helloWorld --stage dev --region us-east-1
+serverless deploy function --function helloWorld \
+  --stage dev \
+  --region us-east-1
 ```
 
 ### Deploy only configuration changes

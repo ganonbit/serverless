@@ -1,22 +1,28 @@
-'use strict';
+'use strict'
 
-const expect = require('chai').expect;
-const AwsCompileWebsocketsEvents = require('../../../../../../../../../../lib/plugins/aws/package/compile/events/websockets/index');
-const Serverless = require('../../../../../../../../../../lib/Serverless');
-const AwsProvider = require('../../../../../../../../../../lib/plugins/aws/provider/awsProvider');
+const expect = require('chai').expect
+const AwsCompileWebsocketsEvents = require('../../../../../../../../../../lib/plugins/aws/package/compile/events/websockets/index')
+const Serverless = require('../../../../../../../../../../lib/serverless')
+const AwsProvider = require('../../../../../../../../../../lib/plugins/aws/provider')
 
 describe('#compileIntegrations()', () => {
-  let awsCompileWebsocketsEvents;
+  let awsCompileWebsocketsEvents
 
   beforeEach(() => {
-    const serverless = new Serverless();
-    serverless.setProvider('aws', new AwsProvider(serverless));
-    serverless.service.provider.compiledCloudFormationTemplate = { Resources: {} };
+    const serverless = new Serverless({ commands: [], options: {} })
+    serverless.setProvider('aws', new AwsProvider(serverless))
+    serverless.service.provider.compiledCloudFormationTemplate = {
+      Resources: {},
+    }
+    serverless.service.functions = {
+      First: {},
+      Second: {},
+    }
+    awsCompileWebsocketsEvents = new AwsCompileWebsocketsEvents(serverless)
 
-    awsCompileWebsocketsEvents = new AwsCompileWebsocketsEvents(serverless);
-
-    awsCompileWebsocketsEvents.websocketsApiLogicalId = awsCompileWebsocketsEvents.provider.naming.getWebsocketsApiLogicalId();
-  });
+    awsCompileWebsocketsEvents.websocketsApiLogicalId =
+      awsCompileWebsocketsEvents.provider.naming.getWebsocketsApiLogicalId()
+  })
 
   it('should create an integration resource for every event', () => {
     awsCompileWebsocketsEvents.validated = {
@@ -30,73 +36,74 @@ describe('#compileIntegrations()', () => {
           route: '$disconnect',
         },
       ],
-    };
+    }
 
-    return awsCompileWebsocketsEvents.compileIntegrations().then(() => {
-      const resources =
-        awsCompileWebsocketsEvents.serverless.service.provider.compiledCloudFormationTemplate
-          .Resources;
+    awsCompileWebsocketsEvents.compileIntegrations()
+    const resources =
+      awsCompileWebsocketsEvents.serverless.service.provider
+        .compiledCloudFormationTemplate.Resources
 
-      expect(resources).to.deep.equal({
-        FirstWebsocketsIntegration: {
-          Type: 'AWS::ApiGatewayV2::Integration',
-          Properties: {
-            ApiId: {
-              Ref: 'WebsocketsApi',
-            },
-            IntegrationType: 'AWS_PROXY',
-            IntegrationUri: {
-              'Fn::Join': [
-                '',
-                [
-                  'arn:',
-                  {
-                    Ref: 'AWS::Partition',
-                  },
-                  ':apigateway:',
-                  {
-                    Ref: 'AWS::Region',
-                  },
-                  ':lambda:path/2015-03-31/functions/',
-                  {
-                    'Fn::GetAtt': ['FirstLambdaFunction', 'Arn'],
-                  },
-                  '/invocations',
-                ],
+    expect(resources).to.deep.equal({
+      FirstWebsocketsIntegration: {
+        Type: 'AWS::ApiGatewayV2::Integration',
+        DependsOn: undefined,
+        Properties: {
+          ApiId: {
+            Ref: 'WebsocketsApi',
+          },
+          IntegrationType: 'AWS_PROXY',
+          IntegrationUri: {
+            'Fn::Join': [
+              '',
+              [
+                'arn:',
+                {
+                  Ref: 'AWS::Partition',
+                },
+                ':apigateway:',
+                {
+                  Ref: 'AWS::Region',
+                },
+                ':lambda:path/2015-03-31/functions/',
+                {
+                  'Fn::GetAtt': ['FirstLambdaFunction', 'Arn'],
+                },
+                '/invocations',
               ],
-            },
+            ],
           },
         },
-        SecondWebsocketsIntegration: {
-          Type: 'AWS::ApiGatewayV2::Integration',
-          Properties: {
-            ApiId: {
-              Ref: 'WebsocketsApi',
-            },
-            IntegrationType: 'AWS_PROXY',
-            IntegrationUri: {
-              'Fn::Join': [
-                '',
-                [
-                  'arn:',
-                  {
-                    Ref: 'AWS::Partition',
-                  },
-                  ':apigateway:',
-                  {
-                    Ref: 'AWS::Region',
-                  },
-                  ':lambda:path/2015-03-31/functions/',
-                  {
-                    'Fn::GetAtt': ['SecondLambdaFunction', 'Arn'],
-                  },
-                  '/invocations',
-                ],
+      },
+      SecondWebsocketsIntegration: {
+        Type: 'AWS::ApiGatewayV2::Integration',
+        DependsOn: undefined,
+        Properties: {
+          ApiId: {
+            Ref: 'WebsocketsApi',
+          },
+          IntegrationType: 'AWS_PROXY',
+          IntegrationUri: {
+            'Fn::Join': [
+              '',
+              [
+                'arn:',
+                {
+                  Ref: 'AWS::Partition',
+                },
+                ':apigateway:',
+                {
+                  Ref: 'AWS::Region',
+                },
+                ':lambda:path/2015-03-31/functions/',
+                {
+                  'Fn::GetAtt': ['SecondLambdaFunction', 'Arn'],
+                },
+                '/invocations',
               ],
-            },
+            ],
           },
         },
-      });
-    });
-  });
-});
+      },
+    })
+  })
+})

@@ -1,9 +1,15 @@
 <!--
 title: Serverless Framework Commands - Login
-menuText: login
-menuOrder: 11
-description: Login to the serverless platform
-layout: Doc
+description: Login to the serverless platform.
+short_title: Commands - Login
+keywords:
+  [
+    'Serverless',
+    'Framework',
+    'login',
+    'Serverless Framework Dashboard',
+    'authentication',
+  ]
 -->
 
 <!-- DOCS-SITE-LINK:START automatically generated  -->
@@ -14,13 +20,10 @@ layout: Doc
 
 # Login
 
-The `login` command logs users into the serverless dashboard.
+The `login` command logs users into the Serverless Framework Dashboard.
 
-It will create a new serverless platform account if one doesn't already exist.
+It will create a new Serverless Framework Org if one doesn't already exist.
 
 ```bash
 serverless login
-
-# Shorthand
-sls login
 ```
